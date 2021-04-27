@@ -44,7 +44,6 @@
         "no-useless-return": "error",
         "no-use-before-define": "error",
         // Style
-        "capitalized-comments": "error",
         "eol-last": "error",
         "comma-dangle": [
             "error",
