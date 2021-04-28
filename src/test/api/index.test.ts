@@ -1,5 +1,5 @@
 /* eslint-disable jest/expect-expect */
-import { ResponseData } from 'src/types'
+import { ResponseData } from './../../types'
 import supertest from 'supertest'
 import app from './../../api'
 
