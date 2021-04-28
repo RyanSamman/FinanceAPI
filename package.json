@@ -15,9 +15,15 @@
     "build:clean": "rm -r dist/index.js",
     "build:watch": "yarn build --watch",
     "dev": "nodemon src/index.ts",
+    "start": "NODE_PATH=./build node dist/index.js",
     "lint": "eslint ./src",
     "lint:fix": "yarn lint --fix",
-    "test": "jest"
+    "test": "jest",
+    "ci": "yarn lint && yarn test && yarn build",
+    "docker:up": "docker-compose up",
+    "docker:build": "docker-compose build",
+    "docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
+    "docker:down": "docker-compose down"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
