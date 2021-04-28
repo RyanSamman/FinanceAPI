@@ -24,3 +24,18 @@ describe('Health Check API', () => {
 		expect(data).toContain('OK')
 	})
 })
+
+describe('404 Route', () => {
+	it('gives a 404 response code and errors', async () => {
+		const res = await api.get('/404')
+			.expect(404)
+			.expect('Content-Type', /json/)
+
+		const { errors, data } = <ResponseData> res.body
+
+		expect(data).toBeUndefined()
+		expect(errors).toBeDefined()
+
+		expect(errors).toContainEqual({ error: '404 - Route not found' })
+	})
+})
