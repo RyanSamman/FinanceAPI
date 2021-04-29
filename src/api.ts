@@ -13,7 +13,7 @@ app.get('/status', (_req, res: Response<ResponseData>) => {
 
 app.use('*', (_req, res: Response<ResponseData>) => {
 	res.status(404).json({ errors: [
-		{ 'error': '404 - Route not found' }
+		{ 'error': '404 - Route not found' },
 	] })
 })
 

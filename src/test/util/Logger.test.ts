@@ -123,7 +123,7 @@ describe('Logger with custom callback functions', () => {
 	it('logger.log works with a custom callback function', () => {
 		const callbackSpy = jest.fn((..._data) => {})
 		const logger = new Logger({
-			onLog: callbackSpy
+			onLog: callbackSpy,
 		})
 
 		logger.log(...texts)
@@ -134,7 +134,7 @@ describe('Logger with custom callback functions', () => {
 	it('logger.info works with a custom callback function', () => {
 		const callbackSpy = jest.fn((..._data) => {})
 		const logger = new Logger({
-			onInfo: callbackSpy
+			onInfo: callbackSpy,
 		})
 
 		logger.info(...texts)
@@ -145,7 +145,7 @@ describe('Logger with custom callback functions', () => {
 	it('logger.error works with a custom callback function', () => {
 		const callbackSpy = jest.fn((..._data) => {})
 		const logger = new Logger({
-			onError: callbackSpy
+			onError: callbackSpy,
 		})
 
 		logger.error(...texts)
