@@ -20,7 +20,7 @@
     "lint:fix": "yarn lint --fix",
     "test": "jest",
     "ci": "yarn lint && yarn test && yarn build",
-    "docker:up": "docker-compose up",
+    "docker:dev": "docker-compose up",
     "docker:build": "docker-compose build",
     "docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
     "docker:down": "docker-compose down"
