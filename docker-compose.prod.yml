@@ -1,7 +1,9 @@
 version: '3.7'
 
 services:
-  ts-node-docker:
+  tamara-api:
     build:
       target: production
+    environment: 
+      NODE_ENV: 'production'
     command: yarn start

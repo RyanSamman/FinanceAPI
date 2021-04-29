@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  ts-node-docker:
+  tamara-api:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,9 +9,12 @@ services:
     volumes:
       - ./src:/home/node/app/src
       - ./nodemon.json:/home/node/app/nodemon.json
-    container_name: ts-node-docker
+    container_name: tamara-api
+    environment: 
+      PORT: "${PORT}"
+      NODE_ENV: 'development'
     expose:
-      - '6000'
+      - "${PORT}"
     ports:
-      - '6000:6000'
-    command: yarn dev
+      - "${PORT}:${PORT}"
+    command: yarn dev 
