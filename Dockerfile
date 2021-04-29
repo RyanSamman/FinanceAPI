@@ -1,15 +1,18 @@
+# Using a LTS Version of Node.js for the base image
 FROM node:14 as base
 
+# Creating a Directory for application
 WORKDIR /home/node/app
 
+# Installing Dependencies
 COPY package.json ./
-
 RUN yarn
 
+# Copying the rest of the application to the working directory
 COPY . .
 
+# Production Image
 FROM base as production
 
-ENV NODE_PATH=./dist
-
+# Build application
 RUN yarn build
