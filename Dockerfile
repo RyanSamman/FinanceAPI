@@ -1,5 +1,5 @@
-# Using a LTS Version of Node.js for the base image
-FROM node:14 as base
+# Using an Alpine-based LTS Version of Node.js for the base image
+FROM node:14-alpine as base
 
 # Creating a Directory for application
 WORKDIR /home/node/app
