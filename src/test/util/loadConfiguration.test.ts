@@ -1,4 +1,3 @@
-import { AssertionError } from 'assert/strict'
 import ConfigError from 'src/util/errors'
 import loadConfiguration, { loadNodeEnv, loadPort, NodeEnvState } from 'src/util/loadConfiguration'
 
