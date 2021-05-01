@@ -17,8 +17,9 @@
     "plugins": [
         "@typescript-eslint"
     ],
+    // "ignorePatterns": "src/migrations/*.ts",
     "rules": {
-        "indent": [
+        "@typescript-eslint/indent": [
             "error",
             "tab"
         ],
