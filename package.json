@@ -17,7 +17,7 @@
     "start": "NODE_PATH=./build node dist/index.js",
     "lint": "eslint ./src",
     "lint:fix": "yarn lint --fix",
-    "test": "jest",
+    "test": "NODE_ENV=CI jest --silent=false --runInBand",
     "ci": "yarn lint && yarn test && yarn build",
     "docker:dev": "docker-compose up",
     "docker:build": "docker-compose build",
