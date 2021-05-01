@@ -28,6 +28,9 @@ jobs:
     - name: Linter
       run: yarn lint
 
+    - name: Initialize Testing Database
+      run: yarn docker:test
+
     - name: Jest Unit & Integration Tests
       run: yarn test
 
