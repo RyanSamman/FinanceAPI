@@ -8,6 +8,9 @@ on:
 
 jobs:
   build:
+  
+    runs-on: ubuntu-latest
+
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
       with:

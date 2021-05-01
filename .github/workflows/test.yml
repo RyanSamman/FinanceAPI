@@ -29,7 +29,7 @@ jobs:
       run: yarn lint
 
     - name: Initialize Testing Database
-      run: yarn docker:test
+      run: yarn docker:test -d
 
     - name: Jest Unit & Integration Tests
       run: yarn test
