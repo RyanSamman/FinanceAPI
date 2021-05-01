@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import chalk from 'chalk'
+import dotenv from 'dotenv'
 import loadConfiguration from './loadConfiguration'
 import Logger from './Logger'
+
+dotenv.config()
 
 const config = loadConfiguration(process.env)
 
@@ -11,11 +13,12 @@ const noop = (..._data: unknown[]) => { }
 
 const logger = new Logger({
 	onLog: config.NODE_ENV === 'production' ? noop : console.log,
-	onInfo: (...data) => console.log(chalk.bgGreen.black(...data)),
-	onError: (...data) => console.error(chalk.bgRed.black(...data)),
+	onInfo: config.NODE_ENV === 'test' ? noop : (...data) => console.log(...data),
+	onError: (...data) => console.error(...data),
 })
 
-logger.info(config)
+logger.info('Loaded Config:')
+logger.info(JSON.stringify(config, null, 2))
 
 export {
 	logger,

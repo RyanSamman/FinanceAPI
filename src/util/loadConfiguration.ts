@@ -1,10 +1,15 @@
+/* eslint-disable prefer-destructuring */
 import ConfigError from './errors'
 
 export type NodeEnvState = 'production' | 'test' | 'development'
 
 export interface Config {
+	PORT: number
+	DOCKER: boolean
+	POSTGRES_DB: string
+	POSTGRES_USER: string
 	NODE_ENV: NodeEnvState
-	PORT: number,
+	POSTGRES_PASSWORD: string
 }
 
 export interface Env {
@@ -46,10 +51,18 @@ export default function loadConfiguration(env: Env): Config {
 
 	const PORT = loadPort(env)
 	const NODE_ENV = loadNodeEnv(env)
+	const DOCKER = !!env.DOCKER
+	const POSTGRES_PASSWORD = env.POSTGRES_PASSWORD
+	const POSTGRES_USER = env.POSTGRES_USER
+	const POSTGRES_DB = env.POSTGRES_DB
 
 	const config = {
 		PORT,
+		DOCKER,
 		NODE_ENV,
+		POSTGRES_DB,
+		POSTGRES_USER,
+		POSTGRES_PASSWORD,
 	}
 
 	const errors = Object.entries(config)
