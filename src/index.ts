@@ -14,9 +14,7 @@ export default async function main(): Promise<http.Server> {
 	logger.info(`Attempting to connect to the Database...'`)
 
 	const connection = await createConnection(typeormConfig)
-		.catch(err => {
-			throw new ServerError(`Failed to connect to the Database. ${err.message}\n`)
-		})
+		.catch(err => { throw new ServerError(`Failed to connect to the Database. ${err.message}\n`) })
 
 	logger.info('Connection successfully established with the Database!')
 
