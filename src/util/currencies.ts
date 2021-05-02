@@ -10,8 +10,9 @@ export interface CurrencyData {
 }
 
 export interface Currencies {
-	[name: string]: CurrencyData
+	[name: string]: CurrencyData | undefined
 }
+
 
 const currencies = {
 	'USD': {
@@ -1086,6 +1087,8 @@ const currencies = {
 		'name_plural': 'Zimbabwean Dollar',
 	},
 }
+
+export const isCurrencyName = (name: string): boolean => !!(<Currencies>currencies)[name]
 
 export type availableCurrencies = keyof typeof currencies
 

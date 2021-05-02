@@ -1,21 +1,31 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { availableCurrencies, currencyNames } from '../util/currencies'
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { User } from './User'
-import { UserPayment } from './UserPayment'
+import { Payment } from './Payment'
+
+export type paymentRecordKind = 'creation' | 'payment' | 'completion'
+export const paymentRecordValues = ['creation', 'payment', 'completion']
 
 @Entity()
 export class PaymentRecord extends BaseEntity {
 	@PrimaryGeneratedColumn()
-	id: number
+	paymentRecordId: number
 
-	@Column('enum', { enum: ['creation', 'payment', 'completion'] })
-	recordKind: 'creation' | 'payment' | 'completion'
+	@Column('enum', { enum: paymentRecordValues })
+	recordKind: paymentRecordKind
 
 	@Column('decimal', { scale: 10, precision: 20 })
 	amount: number
 
+	@Column('enum', { enum: currencyNames, nullable: false })
+	currency: availableCurrencies
+
 	@ManyToOne(_type => User, user => user.paymentHistory, { nullable: false })
 	userId: number
 
-	@ManyToOne(_type => UserPayment, userPayment => userPayment, { nullable: false })
-	userPaymentId: number
+	@ManyToOne(_type => Payment, userPayment => userPayment, { nullable: false })
+	paymentId: number
+
+	@CreateDateColumn()
+	createdAt: Date
 }
