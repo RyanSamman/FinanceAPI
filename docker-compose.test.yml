@@ -3,6 +3,7 @@ version: "3.7"
 services:
   test-db:
     image: postgres
+    container_name: tamara-db-test
     environment:
       POSTGRES_USERNAME: 'postgres'
       POSTGRES_PASSWORD: 'test'

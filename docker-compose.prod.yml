@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   tamara-api:
+    container_name: tamara-api
     build:
       target: production
     environment: 
