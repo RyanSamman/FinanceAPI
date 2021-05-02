@@ -3,7 +3,7 @@ import { Connection } from 'typeorm'
 import { connectToDatabase, clearDatabase } from './connectToDatabase'
 
 import { User } from 'src/entities/User'
-import { UserPayment } from 'src/entities/UserPayment'
+import { Payment } from 'src/entities/Payment'
 import { PaymentRecord } from 'src/entities/PaymentRecord'
 import { getDateAfter } from 'src/util/getDateAfter'
 
@@ -19,7 +19,7 @@ afterAll(async () => {
 
 beforeEach(async () => {
 	await User.delete({})
-	await UserPayment.delete({})
+	await Payment.delete({})
 	await PaymentRecord.delete({})
 })
 
@@ -49,7 +49,7 @@ describe('Test Database Functions', () => {
 
 		newUser.name = 'Joe'
 
-		const newPayment = new UserPayment()
+		const newPayment = new Payment()
 		newPayment.amount = 50
 		newPayment.currency = 'USD'
 		newPayment.paymentStatus = 'underway'
@@ -58,9 +58,10 @@ describe('Test Database Functions', () => {
 		const newPaymentRecord = new PaymentRecord()
 		newPaymentRecord.amount = newPayment.amount
 		newPaymentRecord.recordKind = 'creation'
+		newPaymentRecord.currency = newPayment.currency
 
 		newPayment.paymentHistory = [newPaymentRecord]
-		newUser.userPayments = [newPayment]
+		newUser.payments = [newPayment]
 		newUser.paymentHistory = [newPaymentRecord]
 
 		await newUser.save()
@@ -70,10 +71,10 @@ describe('Test Database Functions', () => {
 
 		const [user] = await User.find({})
 		expect(user.name).toBe(newUser.name)
-		expect(user.userPayments).toBeDefined()
+		expect(user.payments).toBeDefined()
 		expect(user.paymentHistory).toBeDefined()
 
-		expect(user.userPayments).toHaveLength(1)
+		expect(user.payments).toHaveLength(1)
 		expect(user.paymentHistory).toHaveLength(1)
 
 	})
