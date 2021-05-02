@@ -1,12 +1,12 @@
 import path from 'path'
-import { ConnectionOptions } from 'typeorm'
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
 import { config as envConfig, logger } from './util'
 
 const isProduction = envConfig.NODE_ENV === 'production'
 
 logger.log(path.join(__dirname, 'entities', '**', '*.ts'))
 
-const config: ConnectionOptions = {
+const config: PostgresConnectionOptions = {
 	type: 'postgres',
 	port: 5432,
 	host: envConfig.DOCKER ? 'db' : 'localhost',
