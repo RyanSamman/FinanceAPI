@@ -1,32 +1,24 @@
 /* eslint-disable no-console */
-import { Connection, createConnection, ConnectionOptions } from 'typeorm'
+import { Connection, createConnection } from 'typeorm'
 import { PaymentRecord } from '../entities/PaymentRecord'
 import { User } from '../entities/User'
-import { UserPayment } from '../entities/UserPayment'
+import { Payment } from '../entities/Payment'
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
+import createDatabase from 'src/createDatabase'
 
 export async function connectToDatabase(): Promise<Connection> {
-	const config: ConnectionOptions = {
+	const config: PostgresConnectionOptions = {
 		type: 'postgres',
 		username: 'postgres',
 		password: 'test',
 		database: 'test',
 		port: 5433,
 		logging: false,
-		entities: [User, UserPayment, PaymentRecord],
+		entities: [User, Payment, PaymentRecord],
 	}
 
 	try {
-		// Connect to the 'postgres' database, which is always defined
-		const postgresConnection = await createConnection({ ...config, database: 'postgres' })
-
-		// Create the test database
-		await postgresConnection
-			.query('CREATE DATABASE test')
-			// eslint-disable-next-line @typescript-eslint/no-empty-function
-			.catch(() => { })
-
-		// Close the connection to the default 'postgres' database
-		await postgresConnection.close()
+		await createDatabase(config)
 
 		// Create connection to the 'test' database
 		const connection = await createConnection(config)
