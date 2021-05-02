@@ -7,11 +7,14 @@ import { createConnection } from 'typeorm'
 import typeormConfig from './typeormConfig'
 import { config, logger } from './util'
 import { ServerError } from './util/errors'
+import createDatabase from './createDatabase'
 
 export default async function main(): Promise<http.Server> {
 	const server = http.createServer(api)
 
 	logger.info(`Attempting to connect to the Database...'`)
+
+	await createDatabase(typeormConfig)
 
 	const connection = await createConnection(typeormConfig)
 		.catch(err => {
