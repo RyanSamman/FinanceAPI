@@ -1,5 +1,5 @@
 /* eslint-disable jest/expect-expect */
-import { ResponseData } from 'src/types'
+import { ResponseData } from 'src/util/routeTypes'
 import supertest from 'supertest'
 import app from 'src/api'
 
@@ -36,6 +36,6 @@ describe('404 Route', () => {
 		expect(data).toBeUndefined()
 		expect(errors).toBeDefined()
 
-		expect(errors).toContainEqual({ error: '404 - Route not found' })
+		expect(errors).toContainEqual({ 'location': 'error', 'msg': '404 - Route not found', 'param': 'error' })
 	})
 })
