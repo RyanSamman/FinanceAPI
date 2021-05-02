@@ -12,7 +12,7 @@ const config = loadConfiguration(process.env)
 const noop = (..._data: unknown[]) => { }
 
 const logger = new Logger({
-	onLog: config.NODE_ENV === 'production' ? noop : console.log,
+	onLog: config.NODE_ENV !== 'development' ? noop : console.log,
 	onInfo: config.NODE_ENV === 'test' ? noop : (...data) => console.log(...data),
 	onError: (...data) => console.error(...data),
 })
