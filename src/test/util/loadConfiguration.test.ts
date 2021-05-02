@@ -9,7 +9,7 @@ describe('Loading NODE_ENV', () => {
 
 		const PORT = loadNodeEnv(process_env)
 
-		expect(PORT).not.toBeNull()
+		expect(PORT).not.toBeUndefined()
 		expect(PORT).toBe<NodeEnvState>('test')
 	})
 
@@ -20,7 +20,7 @@ describe('Loading NODE_ENV', () => {
 
 		const PORT = loadNodeEnv(process_env)
 
-		expect(PORT).not.toBeNull()
+		expect(PORT).not.toBeUndefined()
 		expect(PORT).toBe<NodeEnvState>('test')
 	})
 
@@ -31,7 +31,7 @@ describe('Loading NODE_ENV', () => {
 
 		const PORT = loadNodeEnv(process_env)
 
-		expect(PORT).not.toBeNull()
+		expect(PORT).not.toBeUndefined()
 		expect(PORT).toBe<NodeEnvState>('production')
 	})
 
@@ -42,7 +42,7 @@ describe('Loading NODE_ENV', () => {
 
 		const PORT = loadNodeEnv(process_env)
 
-		expect(PORT).not.toBeNull()
+		expect(PORT).not.toBeUndefined()
 		expect(PORT).toBe<NodeEnvState>('production')
 	})
 
@@ -53,7 +53,7 @@ describe('Loading NODE_ENV', () => {
 
 		const PORT = loadNodeEnv(process_env)
 
-		expect(PORT).not.toBeNull()
+		expect(PORT).not.toBeUndefined()
 		expect(PORT).toBe<NodeEnvState>('development')
 	})
 
@@ -64,7 +64,7 @@ describe('Loading NODE_ENV', () => {
 
 		const PORT = loadNodeEnv(process_env)
 
-		expect(PORT).not.toBeNull()
+		expect(PORT).not.toBeUndefined()
 		expect(PORT).toBe<NodeEnvState>('development')
 	})
 
@@ -75,7 +75,7 @@ describe('Loading NODE_ENV', () => {
 
 		const PORT = loadNodeEnv(process_env)
 
-		expect(PORT).toBeNull()
+		expect(PORT).toBeUndefined()
 	})
 })
 
@@ -87,7 +87,7 @@ describe('Loading PORT', () => {
 
 		const PORT = loadPort(process_env)
 
-		expect(PORT).not.toBeNull()
+		expect(PORT).not.toBeUndefined()
 		expect(PORT).toBe<number>(parseInt(process_env.PORT))
 	})
 
@@ -98,7 +98,7 @@ describe('Loading PORT', () => {
 
 		const PORT = loadPort(process_env)
 
-		expect(PORT).toBeNull()
+		expect(PORT).toBeUndefined()
 	})
 })
 
@@ -107,6 +107,9 @@ describe('Loading all Required Enviroment Variables', () => {
 		const process_env = {
 			NODE_ENV: 'test',
 			PORT: '6000',
+			POSTGRES_DB: 'database',
+			POSTGRES_USER: 'database',
+			POSTGRES_PASSWORD: 'database',
 		}
 
 		const env = loadConfiguration(process_env)
@@ -132,6 +135,12 @@ describe('Loading all Required Enviroment Variables', () => {
 		expect(() => loadConfiguration(process_env)).toThrow(RegExp(`${process_env.PORT}`))
 		expect(() => loadConfiguration(process_env)).toThrow(/NODE_ENV/)
 		expect(() => loadConfiguration(process_env)).toThrow(RegExp(`${process_env.NODE_ENV}`))
+		expect(() => loadConfiguration(process_env)).toThrow(/POSTGRES_DB/)
+		expect(() => loadConfiguration(process_env)).toThrow('undefined')
+		expect(() => loadConfiguration(process_env)).toThrow(/POSTGRES_USER/)
+		expect(() => loadConfiguration(process_env)).toThrow('undefined')
+		expect(() => loadConfiguration(process_env)).toThrow(/POSTGRES_PASSWORD/)
+		expect(() => loadConfiguration(process_env)).toThrow('undefined')
 
 	})
 })
