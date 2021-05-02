@@ -14,7 +14,7 @@ const hour = 60 * minute
 // 1 day is 24 hours
 const day = 24 * hour
 
-interface ICalculateMilliseconds {
+export interface TimeValues {
 	millis?: number
 	seconds?: number
 	minutes?: number
@@ -22,7 +22,7 @@ interface ICalculateMilliseconds {
 	days?: number
 }
 
-export function calculateMilliseconds({ millis = 0, seconds = 0, minutes = 0, hours = 0, days = 0 }: ICalculateMilliseconds): number {
+export function calculateMilliseconds({ millis = 0, seconds = 0, minutes = 0, hours = 0, days = 0 }: TimeValues): number {
 	return millis * milli
 		+ seconds * second
 		+ minutes * minute
@@ -31,8 +31,8 @@ export function calculateMilliseconds({ millis = 0, seconds = 0, minutes = 0, ho
 }
 
 function getDateAfter(millisecondsPassed: number): Date
-function getDateAfter(timePassed: ICalculateMilliseconds): Date
-function getDateAfter(timePassed: number | ICalculateMilliseconds): Date {
+function getDateAfter(timePassed: TimeValues): Date
+function getDateAfter(timePassed: number | TimeValues): Date {
 	const now = new Date()
 
 	// Convert Object into milliseconds
