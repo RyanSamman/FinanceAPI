@@ -27,6 +27,12 @@ app.get('/status', (_req, res: Response<ResponseData>) => {
 	res.status(200).json({ data: 'OK' })
 })
 
+// Custom Routes
+app.use('/user', user)
+app.use('/transaction', transaction)
+app.use('/payment', payment)
+app.use('/reminder', reminder)
+
 // Error Handler
 app.use(errorHandler)
 
