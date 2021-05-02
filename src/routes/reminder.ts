@@ -41,10 +41,6 @@ router.get('/:userId',
 			.filter(payment => payment.dueAt <= new Date())
 			// The payment has not had a reminder sent of it before
 			.filter(payment => !payment.sentDueReminder)
-		user.payments.forEach(payment => {
-			if ()
-		})
-
 
 		res.status(200).json({ data: duePayments })
 	})
